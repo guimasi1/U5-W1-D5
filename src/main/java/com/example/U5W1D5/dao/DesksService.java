@@ -32,4 +32,12 @@ public class DesksService {
         return desksDAO.findByType(deskType);
     }
 
+    public List<Desk> findByBuildingCityAndType(String city, DeskType type) {
+        return desksDAO.findByBuildingCityAndType(city, type);
+    }
+    public List<Desk> findByCity(String city) {
+        return desksDAO.findByBuildingCity(city);
+    }
+
+
 }

@@ -19,4 +19,9 @@ public interface DesksDAO extends JpaRepository<Desk, UUID> {
     List<Desk> findAvaiblableDesks(@Param("date")LocalDate date);
 
     List<Desk> findByType(DeskType type);
+
+
+
+    List<Desk> findByBuildingCityAndType(String city, DeskType type);
+    List<Desk> findByBuildingCity(String city);
 }

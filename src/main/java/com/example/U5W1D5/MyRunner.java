@@ -36,7 +36,9 @@ public class MyRunner implements CommandLineRunner {
         User user = usersService.findAll().get(1);
         Reservation reservation = new Reservation(LocalDate.now(),user,desk);
         // reservationsService.save(reservation);
-        desksService.findByType(DeskType.MEETINGSPACE).forEach(System.out::println);
+        // desksService.findByType(DeskType.MEETINGSPACE).forEach(System.out::println);
+        // desksService.findByCity("Gudrunton").forEach(System.out::println);
+        desksService.findByBuildingCityAndType("Gudrunton",DeskType.OPENSPACE).forEach(System.out::println);
     }
 
     public void createFakeBuildings() {
