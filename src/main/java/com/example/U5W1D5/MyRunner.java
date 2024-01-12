@@ -31,10 +31,11 @@ public class MyRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-      /*  createFakeBuildings();
-        createFakeDesks();
-        createFakeUsers();*/
+        // createFakeBuildings();
+        // createFakeDesks();
+        createFakeUsers();
         interact();
+        // usersService.deleteAllUser();
 
         // Desk desk = desksService.findAll().get(8);
         // desksService.findAll().forEach(System.out::println);
@@ -42,7 +43,6 @@ public class MyRunner implements CommandLineRunner {
 
         // User user = usersService.findAll().get(1);
         // Reservation reservation = new Reservation(LocalDate.now().plusDays(10),user,desk);
-        // usersService.deleteAllUser();
 
         // reservationsService.findByIdAndDelete(UUID.fromString("ec7edceb-9486-4256-8e84-6770a14157fc"));
         // reservationsService.save(reservation);
@@ -95,6 +95,7 @@ public class MyRunner implements CommandLineRunner {
         String username;
         String email;
         User user;
+        System.out.println("Salve.");
         do {
             System.out.println("Inserisca il suo username di almeno 3 lettere.");
             username = scanner.nextLine();
