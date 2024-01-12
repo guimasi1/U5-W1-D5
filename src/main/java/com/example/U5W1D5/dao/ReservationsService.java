@@ -50,9 +50,10 @@ public class ReservationsService {
             if(!hasUserAlreadyReservedForTheDate) {
                 reservationsDAO.save(reservation);
                 System.out.println("Reservation saved.");
-                System.out.println("Reservation details -> Username:" + reservation.getUser().getUsername() +
-                        ",  Date: " + reservation.getDate() + ", Desk: " + reservation.getDesk().getDescription() +
-                        ", Building: " + reservation.getDesk().getBuilding().getName());
+                System.out.println("************ Reservation details ************\n" + "Username: " + reservation.getUser().getUsername() +
+                        ",\nDate: " + reservation.getDate() + ",\nDesk: " + reservation.getDesk().getDescription() +
+                        ",\nBuilding: " + reservation.getDesk().getBuilding().getName() + "." +
+                        "\n*********************************************");
             } else {
                 System.out.println("The user has already a reservation for the following date: " + reservation.getDate());
             }

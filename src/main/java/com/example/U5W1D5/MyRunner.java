@@ -133,7 +133,7 @@ public class MyRunner implements CommandLineRunner {
         } while (month < minMonth || month > 12);
         int maxDay = LocalDate.of(year,month,1).lengthOfMonth();
         int minDay = 1;
-        if(year == LocalDate.now().getYear() ) {
+        if(year == LocalDate.now().getYear() && month == LocalDate.now().getMonthValue()) {
             minDay = LocalDate.now().getDayOfMonth();
         }
         do {
