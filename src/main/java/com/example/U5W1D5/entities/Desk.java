@@ -1,10 +1,7 @@
 package com.example.U5W1D5.entities;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,6 +9,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 @Entity
 @Table(name = "desks")
 public class Desk {
@@ -32,6 +30,7 @@ public class Desk {
     private Building building;
 
     @OneToMany(mappedBy = "desk")
+    @ToString.Exclude
     private List<Reservation> reservations;
 
     public Desk(String description, DeskType type, int maxNumberOfOccupants, Building building) {

@@ -28,4 +28,9 @@ public class Reservation {
     @JoinColumn(name = "desk_id")
     private Desk desk;
 
+    public Reservation(LocalDate date, User user, Desk desk) {
+        this.date = date;
+        this.user = user;
+        this.desk = desk;
+    }
 }

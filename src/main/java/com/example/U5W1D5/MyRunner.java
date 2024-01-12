@@ -4,14 +4,13 @@ import com.example.U5W1D5.dao.BuildingsService;
 import com.example.U5W1D5.dao.DesksService;
 import com.example.U5W1D5.dao.ReservationsService;
 import com.example.U5W1D5.dao.UsersService;
-import com.example.U5W1D5.entities.Building;
-import com.example.U5W1D5.entities.Desk;
-import com.example.U5W1D5.entities.DeskType;
-import com.example.U5W1D5.entities.User;
+import com.example.U5W1D5.entities.*;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 public class MyRunner implements CommandLineRunner {
@@ -27,9 +26,17 @@ public class MyRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        /*createFakeBuildings();
-        createFakeUsers();*/
+       /* createFakeBuildings();
         createFakeDesks();
+        createFakeUsers();*/
+        Desk desk = desksService.findAll().get(3);
+        // desksService.findAll().forEach(System.out::println);
+        //desksService.findAvaiblableDesks(LocalDate.now()).forEach(System.out::println);
+
+        User user = usersService.findAll().get(1);
+        Reservation reservation = new Reservation(LocalDate.now(),user,desk);
+        reservationsService.save(reservation);
+
     }
 
     public void createFakeBuildings() {
@@ -68,5 +75,7 @@ public class MyRunner implements CommandLineRunner {
             desksService.save(desk);
         }
     }
+
+
 
 }
