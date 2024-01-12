@@ -29,16 +29,18 @@ public class MyRunner implements CommandLineRunner {
        /* createFakeBuildings();
         createFakeDesks();
         createFakeUsers();*/
-        Desk desk = desksService.findAll().get(3);
+        Desk desk = desksService.findAll().get(8);
         // desksService.findAll().forEach(System.out::println);
         //desksService.findAvaiblableDesks(LocalDate.now()).forEach(System.out::println);
 
         User user = usersService.findAll().get(1);
-        Reservation reservation = new Reservation(LocalDate.now(),user,desk);
-        // reservationsService.save(reservation);
+        Reservation reservation = new Reservation(LocalDate.now().plusDays(10),user,desk);
+        //reservationsService.save(reservation);
+        reservationsService.save2(reservation);
         // desksService.findByType(DeskType.MEETINGSPACE).forEach(System.out::println);
         // desksService.findByCity("Gudrunton").forEach(System.out::println);
-        desksService.findByBuildingCityAndType("Gudrunton",DeskType.OPENSPACE).forEach(System.out::println);
+        // desksService.findByBuildingCityAndType("Gudrunton",DeskType.OPENSPACE).forEach(System.out::println);
+
     }
 
     public void createFakeBuildings() {
