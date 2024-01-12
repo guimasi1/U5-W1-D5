@@ -1,6 +1,7 @@
 package com.example.U5W1D5.dao;
 
 import com.example.U5W1D5.entities.Desk;
+import com.example.U5W1D5.entities.DeskType;
 import com.example.U5W1D5.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -27,6 +28,8 @@ public class DesksService {
         return desksDAO.findAvaiblableDesks(date);
     }
 
-
+    public List<Desk> findByType(DeskType deskType) {
+        return desksDAO.findByType(deskType);
+    }
 
 }
