@@ -17,7 +17,6 @@ import java.util.UUID;
 public class DesksService {
     @Autowired
     private DesksDAO desksDAO;
-
     public void save(Desk desk) {
         desksDAO.save(desk);
         System.out.println("Desk saved.");
@@ -44,6 +43,12 @@ public class DesksService {
     }
     public List<Desk> findByCity(String city) {
         return desksDAO.findByBuildingCity(city);
+    }
+    public List<Desk> findByDescription(String description) {
+        return desksDAO.findByDescription(description);
+    }
+    public List<Desk> findByMaxNumberOfOccupants(int maxNumberOfOccupants) {
+        return desksDAO.findByMaxNumberOfOccupants(maxNumberOfOccupants);
     }
 
 

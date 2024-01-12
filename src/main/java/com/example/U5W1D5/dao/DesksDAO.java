@@ -17,11 +17,10 @@ public interface DesksDAO extends JpaRepository<Desk, UUID> {
 
     @Query("SELECT d FROM Desk d WHERE d NOT IN (SELECT r.desk FROM Reservation r WHERE r.date = :date)")
     List<Desk> findAvaiblableDesks(@Param("date")LocalDate date);
-
     List<Desk> findByType(DeskType type);
-
-
-
     List<Desk> findByBuildingCityAndType(String city, DeskType type);
     List<Desk> findByBuildingCity(String city);
+    List<Desk> findByDescription(String description);
+    List<Desk> findByMaxNumberOfOccupants(int maxNumberOfOccupants);
+
 }

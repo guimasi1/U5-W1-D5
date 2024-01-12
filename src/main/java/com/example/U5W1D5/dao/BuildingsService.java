@@ -19,8 +19,17 @@ public class BuildingsService {
         System.out.println("Building saved.");
     }
 
-
     public List<Building> findAll() {
         return buildingsDAO.findAll();
+    }
+
+    public List<Building> findByName(String name) {
+        return buildingsDAO.findByName(name);
+    }
+    public List<Building> findByAddress(String address) {
+        return buildingsDAO.findByAddress(address);
+    }
+    public List<Building> findByCity(String city) {
+        return buildingsDAO.findByCity(city);
     }
 }
