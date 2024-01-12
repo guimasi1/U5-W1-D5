@@ -4,6 +4,8 @@ import com.example.U5W1D5.entities.Building;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BuildingsService {
     @Autowired
@@ -12,5 +14,9 @@ public class BuildingsService {
     public void save(Building building) {
         buildingsDAO.save(building);
         System.out.println("Building saved.");
+    }
+
+    public List<Building> findAll() {
+        return buildingsDAO.findAll();
     }
 }

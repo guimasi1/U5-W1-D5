@@ -5,6 +5,8 @@ import com.example.U5W1D5.dao.DesksService;
 import com.example.U5W1D5.dao.ReservationsService;
 import com.example.U5W1D5.dao.UsersService;
 import com.example.U5W1D5.entities.Building;
+import com.example.U5W1D5.entities.Desk;
+import com.example.U5W1D5.entities.DeskType;
 import com.example.U5W1D5.entities.User;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,9 @@ public class MyRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
+        /*createFakeBuildings();
+        createFakeUsers();*/
+        createFakeDesks();
     }
 
     public void createFakeBuildings() {
@@ -43,6 +47,25 @@ public class MyRunner implements CommandLineRunner {
             User user = new User(faker.name().username(),faker.name().fullName(),
                     faker.internet().emailAddress());
             usersService.save(user);
+        }
+    }
+
+    public void createFakeDesks() {
+        Faker faker = new Faker();
+        for (int i = 0; i < 3; i++) {
+            Building building = buildingsService.findAll().get(1);
+            Desk desk = new Desk(faker.company().catchPhrase(),DeskType.MEETINGSPACE,faker.number().numberBetween(5,100),building);
+            desksService.save(desk);
+        }
+        for (int i = 0; i < 3; i++) {
+            Building building = buildingsService.findAll().get(2);
+            Desk desk = new Desk(faker.company().catchPhrase(),DeskType.PRIVATE,faker.number().numberBetween(5,100),building);
+            desksService.save(desk);
+        }
+        for (int i = 0; i < 3; i++) {
+            Building building = buildingsService.findAll().get(3);
+            Desk desk = new Desk(faker.company().catchPhrase(),DeskType.OPENSPACE,faker.number().numberBetween(5,100),building);
+            desksService.save(desk);
         }
     }
 
