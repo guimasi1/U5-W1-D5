@@ -123,15 +123,23 @@ public class MyRunner implements CommandLineRunner {
             System.out.println("Inserisca l'anno");
             year = Integer.parseInt(scanner.nextLine());
         } while (year < LocalDate.now().getYear());
+        int minMonth = 1;
+        if(year == LocalDate.now().getYear()) {
+            minMonth = LocalDate.now().getMonthValue();
+        }
         do {
             System.out.println("Inserisca il mese");
             month = Integer.parseInt(scanner.nextLine());
-        } while (month < 1 || month > 12);
+        } while (month < minMonth || month > 12);
         int maxDay = LocalDate.of(year,month,1).lengthOfMonth();
+        int minDay = 1;
+        if(year == LocalDate.now().getYear() ) {
+            minDay = LocalDate.now().getDayOfMonth();
+        }
         do {
             System.out.println("Inserisca il giorno");
             day = Integer.parseInt(scanner.nextLine());
-        } while (day < 1  || day > maxDay);
+        } while (day < minDay  || day > maxDay);
 
         LocalDate reservationDate = LocalDate.of(year,month,day);
         System.out.println("Questa è la lista delle postazioni disponibili nella data da lei inserita.");
