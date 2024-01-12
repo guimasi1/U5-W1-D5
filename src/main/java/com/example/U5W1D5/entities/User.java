@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
 
-    private String surname;
+    private String username;
 
     private String name;
 
@@ -31,7 +31,7 @@ public class User {
     private List<Reservation> reservations;
 
     public User(String surname, String name, String email) {
-        this.surname = surname;
+        this.username = surname;
         this.name = name;
         this.email = email;
     }

@@ -6,11 +6,15 @@ import com.example.U5W1D5.dao.ReservationsService;
 import com.example.U5W1D5.dao.UsersService;
 import com.example.U5W1D5.entities.*;
 import com.github.javafaker.Faker;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Scanner;
 
 @Component
 public class MyRunner implements CommandLineRunner {
@@ -26,21 +30,21 @@ public class MyRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-       /* createFakeBuildings();
+      /*  createFakeBuildings();
         createFakeDesks();
         createFakeUsers();*/
         Desk desk = desksService.findAll().get(8);
         // desksService.findAll().forEach(System.out::println);
-        //desksService.findAvaiblableDesks(LocalDate.now()).forEach(System.out::println);
+        //desksService.findAvaiblableDesksByDate(LocalDate.now()).forEach(System.out::println);
 
         User user = usersService.findAll().get(1);
         Reservation reservation = new Reservation(LocalDate.now().plusDays(10),user,desk);
-        //reservationsService.save(reservation);
-        reservationsService.save2(reservation);
+        // reservationsService.save(reservation);
+        // reservationsService.save2(reservation);
         // desksService.findByType(DeskType.MEETINGSPACE).forEach(System.out::println);
         // desksService.findByCity("Gudrunton").forEach(System.out::println);
         // desksService.findByBuildingCityAndType("Gudrunton",DeskType.OPENSPACE).forEach(System.out::println);
-
+        interact();
     }
 
     public void createFakeBuildings() {
@@ -80,6 +84,69 @@ public class MyRunner implements CommandLineRunner {
         }
     }
 
+    public void interact() {
+        Scanner scanner = new Scanner(System.in);
+        String name;
+        String username;
+        String email;
+        User user;
+        do {
+            System.out.println("Inserisca il suo username di almeno 3 lettere.");
+            username = scanner.nextLine();
+        } while(username.length() < 3);
+        if (usersService.findByUsername(username) == null) {
+            System.out.println("Mi dispiace ma non ci risulta nessun utente con questo username. " +
+                    "La preghiamo di inserire i dati per la registrazione.");
+            do {
+                System.out.println("Inserisca il suo nome di almeno 3 lettere.");
+                name = scanner.nextLine();
+            } while (name.length() < 3);
+            do {
+                System.out.println("Inserisca il suo username di almeno 3 lettere.");
+                username = scanner.nextLine();
+            } while (username.length() < 3);
+            do {
+                System.out.println("Inserisca la sua mail.");
+                email = scanner.nextLine();
+            } while (email.length() < 3);
+
+            user = new User(username, name, email);
+            usersService.save(user);
+        } else {
+            user = usersService.findByUsername(username);
+        }
+        System.out.println("Per quale data vuole prenotare la postazione?");
+        int day = 0;
+        int month = 0;
+        int year;
+        do {
+            System.out.println("Inserisca l'anno");
+            year = Integer.parseInt(scanner.nextLine());
+        } while (year < LocalDate.now().getYear());
+        do {
+            System.out.println("Inserisca il mese");
+            month = Integer.parseInt(scanner.nextLine());
+        } while (month < 1 || month > 12);
+        int maxDay = LocalDate.of(year,month,1).lengthOfMonth();
+        do {
+            System.out.println("Inserisca il giorno");
+            day = Integer.parseInt(scanner.nextLine());
+        } while (day < 1  || day > maxDay);
+
+        LocalDate reservationDate = LocalDate.of(year,month,day);
+        System.out.println("Questa è la lista delle postazioni disponibili nella data da lei inserita.");
+        List<Desk> availableDesks = desksService.findAvaiblableDesksByDate(reservationDate);
+        availableDesks.forEach(System.out::println);
+        int deskChoice = -1;
+        do {
+            System.out.println("Abbiamo " + availableDesks.size() + " postazioni disponibili. " +
+                    "Quale postazione vuole prenotare? Inserisca un numero da 1 a " + availableDesks.size());
+            deskChoice = Integer.parseInt(scanner.nextLine()) - 1;
+        } while (deskChoice < -1);
+        Reservation reservation = new Reservation(reservationDate, user, availableDesks.get(deskChoice));
+        reservationsService.save2(reservation);
+        System.out.println("Grazie e arrivederci.");
+    }
 
 
 }

@@ -2,11 +2,8 @@ package com.example.U5W1D5.dao;
 
 import com.example.U5W1D5.entities.Desk;
 import com.example.U5W1D5.entities.DeskType;
-import com.example.U5W1D5.entities.Reservation;
-import com.example.U5W1D5.entities.User;
 import com.example.U5W1D5.exceptions.ItemNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -30,8 +27,8 @@ public class DesksService {
         return desksDAO.findAll();
     }
 
-    public List<Desk> findAvaiblableDesks(LocalDate date) {
-        return desksDAO.findAvaiblableDesks(date);
+    public List<Desk> findAvaiblableDesksByDate(LocalDate date) {
+        return desksDAO.findAvaiblableDesksByDate(date);
     }
 
     public List<Desk> findByType(DeskType deskType) {

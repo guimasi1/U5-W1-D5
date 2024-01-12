@@ -6,11 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface UsersDAO extends JpaRepository<User, UUID> {
-      List<User> findBySurname(String surname);
+      User findByUsername(String username);
       List<User> findByName(String name);
       List<User> findByEmail(String email);
 }
