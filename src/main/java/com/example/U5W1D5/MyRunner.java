@@ -95,6 +95,7 @@ public class MyRunner implements CommandLineRunner {
             username = scanner.nextLine();
         } while(username.length() < 3);
         if (usersService.findByUsername(username) == null) {
+            String usernameToRegister;
             System.out.println("Mi dispiace ma non ci risulta nessun utente con questo username. " +
                     "La preghiamo di inserire i dati per la registrazione.");
             do {
@@ -103,14 +104,15 @@ public class MyRunner implements CommandLineRunner {
             } while (name.length() < 3);
             do {
                 System.out.println("Inserisca il suo username di almeno 3 lettere.");
-                username = scanner.nextLine();
-            } while (username.length() < 3);
+                usernameToRegister = scanner.nextLine();
+                if (usersService.findByUsername(usernameToRegister) != null) System.out.println("Questo username è già presente nel nostro database.");
+            } while (usernameToRegister.length() < 3 || usersService.findByUsername(usernameToRegister) != null);
             do {
                 System.out.println("Inserisca la sua mail.");
                 email = scanner.nextLine();
             } while (email.length() < 3);
 
-            user = new User(username, name, email);
+            user = new User(usernameToRegister, name, email);
             usersService.save(user);
         } else {
             user = usersService.findByUsername(username);
