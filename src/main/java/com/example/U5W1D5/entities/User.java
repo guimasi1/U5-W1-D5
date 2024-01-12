@@ -12,17 +12,27 @@ import java.util.UUID;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "users")
 public class User {
     @Id
     @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
 
+    private String surname;
+
     private String name;
+
 
     private String email;
 
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
     private List<Reservation> reservations;
+
+    public User(String surname, String name, String email) {
+        this.surname = surname;
+        this.name = name;
+        this.email = email;
+    }
 }

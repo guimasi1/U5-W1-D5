@@ -23,4 +23,9 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "desk_id")
+    private Desk desk;
+
 }

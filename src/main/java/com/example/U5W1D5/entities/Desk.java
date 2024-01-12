@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -30,4 +31,13 @@ public class Desk {
     @JoinColumn(name = "building_id")
     private Building building;
 
+    @OneToMany(mappedBy = "desk")
+    private List<Reservation> reservations;
+
+    public Desk(String description, DeskType type, int maxNumberOfOccupants, Building building) {
+        this.description = description;
+        this.type = type;
+        this.maxNumberOfOccupants = maxNumberOfOccupants;
+        this.building = building;
+    }
 }
