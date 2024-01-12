@@ -2,6 +2,7 @@ package com.example.U5W1D5.dao;
 
 import com.example.U5W1D5.entities.Desk;
 import com.example.U5W1D5.entities.DeskType;
+import com.example.U5W1D5.entities.Reservation;
 import com.example.U5W1D5.exceptions.ItemNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,12 @@ public class DesksService {
     }
     public List<Desk> findByMaxNumberOfOccupants(int maxNumberOfOccupants) {
         return desksDAO.findByMaxNumberOfOccupants(maxNumberOfOccupants);
+    }
+
+    public void findByIdAndDelete(UUID uuid) {
+        Desk found = this.findById(uuid);
+        desksDAO.delete(found);
+        System.out.println("Desk deleted");
     }
 
 

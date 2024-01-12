@@ -1,5 +1,6 @@
 package com.example.U5W1D5.dao;
 
+import com.example.U5W1D5.entities.Desk;
 import com.example.U5W1D5.entities.Reservation;
 import com.example.U5W1D5.entities.User;
 import com.example.U5W1D5.exceptions.ItemNotFoundException;
@@ -28,7 +29,11 @@ public class UsersService {
         return usersDAO.findById(uuid).orElseThrow(() -> new ItemNotFoundException(uuid));
     }
 
-
+    public void findByIdAndDelete(UUID uuid) {
+        User found = this.findById(uuid);
+        usersDAO.delete(found);
+        System.out.println("User deleted");
+    }
     public User findByUsername(String username) {
         return usersDAO.findByUsername(username);
     }
@@ -37,5 +42,12 @@ public class UsersService {
     }
     public List<User> findByEmail(String email) {
         return usersDAO.findByEmail(email);
+    }
+
+    public void deleteAllUser() {
+        List<User> users = usersDAO.findAll();
+        for (int i = 0; i < users.size(); i++) {
+            usersDAO.delete(users.get(i));
+        }
     }
 }

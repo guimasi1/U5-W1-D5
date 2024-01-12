@@ -2,6 +2,7 @@ package com.example.U5W1D5.dao;
 
 import com.example.U5W1D5.entities.Building;
 import com.example.U5W1D5.entities.Desk;
+import com.example.U5W1D5.entities.Reservation;
 import com.example.U5W1D5.exceptions.ItemNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,4 +33,6 @@ public class BuildingsService {
     public List<Building> findByCity(String city) {
         return buildingsDAO.findByCity(city);
     }
+
+
 }

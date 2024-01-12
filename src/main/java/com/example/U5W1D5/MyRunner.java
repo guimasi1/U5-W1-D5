@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 @Component
 public class MyRunner implements CommandLineRunner {
@@ -33,18 +34,22 @@ public class MyRunner implements CommandLineRunner {
       /*  createFakeBuildings();
         createFakeDesks();
         createFakeUsers();*/
-        Desk desk = desksService.findAll().get(8);
-        // desksService.findAll().forEach(System.out::println);
-        //desksService.findAvaiblableDesksByDate(LocalDate.now()).forEach(System.out::println);
+        interact();
 
-        User user = usersService.findAll().get(1);
-        Reservation reservation = new Reservation(LocalDate.now().plusDays(10),user,desk);
+        // Desk desk = desksService.findAll().get(8);
+        // desksService.findAll().forEach(System.out::println);
+        // desksService.findAvaiblableDesksByDate(LocalDate.now()).forEach(System.out::println);
+
+        // User user = usersService.findAll().get(1);
+        // Reservation reservation = new Reservation(LocalDate.now().plusDays(10),user,desk);
+        // usersService.deleteAllUser();
+
+        // reservationsService.findByIdAndDelete(UUID.fromString("ec7edceb-9486-4256-8e84-6770a14157fc"));
         // reservationsService.save(reservation);
         // reservationsService.save2(reservation);
         // desksService.findByType(DeskType.MEETINGSPACE).forEach(System.out::println);
         // desksService.findByCity("Gudrunton").forEach(System.out::println);
         // desksService.findByBuildingCityAndType("Gudrunton",DeskType.OPENSPACE).forEach(System.out::println);
-        interact();
     }
 
     public void createFakeBuildings() {

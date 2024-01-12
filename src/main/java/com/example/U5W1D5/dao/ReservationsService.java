@@ -70,4 +70,10 @@ public class ReservationsService {
         return reservationsDAO.findByDate(date);
     }
 
+    public void findByIdAndDelete(UUID uuid) {
+        Reservation found = this.findById(uuid);
+        reservationsDAO.delete(found);
+        System.out.println("Reservation deleted");
+    }
+
 }
